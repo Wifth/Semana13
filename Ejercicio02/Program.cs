@@ -8,3 +8,9 @@ d.Precio = 20.5;
 d.Dias = "lun,mar,mier";
 
 Console.WriteLine(d);
+
+string[] lista = d.ListaDias();
+foreach (string str in lista)
+{
+    Console.WriteLine(str);
+}
