@@ -33,3 +33,11 @@ foreach (var tex in z)
 {
     Console.WriteLine(tex.Trim());
 }
+
+Console.WriteLine();
+
+string aa = "Paciencia y constancia";
+int cc = aa.IndexOf("cia");
+Console.WriteLine(cc);
+string bb = aa.Substring(cc, 2);
+Console.WriteLine(bb);
