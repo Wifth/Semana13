@@ -12,13 +12,22 @@ namespace Ejercicio02
         public string Dias { get; set; }
         public double Precio { get; set; }
 
-        public override string ToString()
+        static void Crear()
         {
-            return $"Desayuno {Nombre} a S/{Precio}, servido los {Dias}";
+            Console.WriteLine("Ingrese el nombre del plato a crear: ");
+            string n = Console.ReadLine();
+            Console.WriteLine("Ingrese el costo del plato: ");
+            int p = int.Parse(Console.ReadLine());
+            Console.WriteLine("Ingrese los días en venta: ");
+
         }
-        public string[] ListaDias()
+        static void Eliminar()
         {
-            return Dias.Split(',') ;
+            
+        }
+        static void Lista()
+        {
+
         }
     }
 }
