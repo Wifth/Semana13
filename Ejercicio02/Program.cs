@@ -7,11 +7,9 @@ class Program
         MostrarMenu();
         string opcion = Console.ReadLine().ToLower();
 
-        // Llamar al método que muestra los detalles del desayuno según la opción elegida
         MostrarDesayunoSeleccionado(opcion);
     }
 
-    // Mostrar las opciones del menú de desayunos
     static void MostrarMenu()
     {
         Console.Clear();
@@ -23,12 +21,10 @@ class Program
         Console.Write("Ingresa el número del desayuno que deseas elegir (1-4): ");
     }
 
-    // Mostrar los detalles del desayuno elegido por el usuario
     static void MostrarDesayunoSeleccionado(string opcion)
     {
         Desayuno desayunoSeleccionado = null;
 
-        // Según la opción ingresada, creamos un objeto Desayuno con los datos correctos
         switch (opcion)
         {
             case "1":
@@ -48,7 +44,6 @@ class Program
                 return;
         }
 
-        // Mostrar los detalles del desayuno seleccionado
         Console.Clear();
         Console.WriteLine($"Has seleccionado el desayuno: {desayunoSeleccionado.Nombre}");
         Console.WriteLine($"Precio: S/{desayunoSeleccionado.Precio}");
