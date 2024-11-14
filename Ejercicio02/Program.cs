@@ -1,5 +1,6 @@
 ﻿using Ejercicio02;
 
+
 class Program
 {
     static void Main()
@@ -52,4 +53,3 @@ class Program
         Console.ReadKey();
     }
 }
-
