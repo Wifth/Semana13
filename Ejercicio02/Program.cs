@@ -3,53 +3,83 @@
 
 class Program
 {
-    static void Main()
+    static Desayuno[] desayunos = new Desayuno[10];
+    static int contador = 0;  
+
+    static void Main(string[] args)
     {
-        MostrarMenu();
-        string opcion = Console.ReadLine().ToLower();
+        byte opcion;
+        string regresar;
 
-        MostrarDesayunoSeleccionado(opcion);
-    }
-
-    static void MostrarMenu()
-    {
-        Console.Clear();
-        Console.WriteLine("Elige un tipo de desayuno:");
-        Console.WriteLine("1. Continental");
-        Console.WriteLine("2. Buffet");
-        Console.WriteLine("3. Americano");
-        Console.WriteLine("4. Inglés");
-        Console.Write("Ingresa el número del desayuno que deseas elegir (1-4): ");
-    }
-
-    static void MostrarDesayunoSeleccionado(string opcion)
-    {
-        Desayuno desayunoSeleccionado = null;
-
-        switch (opcion)
+        do
         {
-            case "1":
-                desayunoSeleccionado = new Desayuno("Continental", 30.0, 2);
-                break;
-            case "2":
-                desayunoSeleccionado = new Desayuno("Buffet", 50.0, 1);
-                break;
-            case "3":
-                desayunoSeleccionado = new Desayuno("Americano", 15.0, 5);
-                break;
-            case "4":
-                desayunoSeleccionado = new Desayuno("Inglés", 25.0, 3);
-                break;
-            default:
-                Console.WriteLine("Opción no válida. Por favor, elige un número entre 1 y 4.");
-                return;
-        }
+            Console.WriteLine("===Menú===");
+            Console.WriteLine("1. Crear Desayuno");
+            Console.WriteLine("2. Listar Desayunos");
+            Console.WriteLine("3. Eliminar Desayuno");
+            Console.WriteLine("4. Fin");
+            Console.Write("Ingrese una opción: ");
 
-        Console.Clear();
-        Console.WriteLine($"Has seleccionado el desayuno: {desayunoSeleccionado.Nombre}");
-        Console.WriteLine($"Precio: S/{desayunoSeleccionado.Precio}");
-        Console.WriteLine($"Se sirve durante {desayunoSeleccionado.Dias} días.");
+            while (!byte.TryParse(Console.ReadLine(), out opcion) || opcion < 1 || opcion > 4)
+            {
+                Console.Write("Opción inválida. Ingrese una opción entre 1 y 4: ");
+            }
 
-        Console.ReadKey();
+            switch (opcion)
+            {
+                case 1:
+                    CrearDesayuno();
+                    break;
+                case 2:
+                    ListarDesayunos();
+                    break;
+                case 3:
+                    EliminarDesayuno();
+                    break;
+                case 4:
+                    Console.WriteLine("¡Adiós! Gracias por su visita");
+                    break;
+            }
+
+            Console.Write("\n¿Desea regresar al menú? [si]: ");
+            regresar = Console.ReadLine().ToLower();
+            Console.Clear();
+
+        } while (regresar == "si");
     }
-}
+
+    static void CrearDesayuno()
+    {
+        if (contador < desayunos.Length)
+        {
+            Console.Write("Ingrese el nombre del desayuno: ");
+            string nombre = Console.ReadLine();
+
+            int dias;
+            Console.Write("Ingrese la cantidad de días en los que se sirve: ");
+            while (!int.TryParse(Console.ReadLine(), out dias) || dias <= 0)
+            {
+                Console.Write("Valor inválido. Ingrese un número positivo para los días: ");
+            }
+
+            double precio;
+            Console.Write("Ingrese el precio del desayuno en soles: ");
+            while (!double.TryParse(Console.ReadLine(), out precio) || precio <= 0)
+            {
+                Console.Write("Valor inválido. Ingrese un número positivo para el precio: ");
+            }
+
+            desayunos[contador] = new Desayuno(nombre, dias, precio);
+            contador++;
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("¡Desayuno creado exitosamente!");
+            Console.ResetColor();
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("El arreglo de desayunos está lleno.");
+            Console.ResetColor();
+        }
+    }
