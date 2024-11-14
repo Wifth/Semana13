@@ -1,37 +1,55 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using Ejercicio02;
 
-using Ejercicio02;
-byte opcion;
-string regresar;
-Desayuno d = new Desayuno();
-do
+
+class Program
 {
-    Console.WriteLine("Menu");
-    Console.WriteLine();
-    Console.WriteLine("1. Crear");
-    Console.WriteLine(".2 Lista");
-    Console.WriteLine("3. Eliminar");
-    Console.WriteLine("4. Cerrar");
-    Console.WriteLine();
-    Console.Write("Ingrese una opcion: ");
-
-    while (!byte.TryParse(Console.ReadLine(), out opcion) || opcion > 3)
+    static void Main()
     {
-        Console.Write("Error: Ingrese opción: ");
+        MostrarMenu();
+        string opcion = Console.ReadLine().ToLower();
+
+        MostrarDesayunoSeleccionado(opcion);
     }
 
-    switch (opcion)
+    static void MostrarMenu()
     {
-        case 0: Environment.Exit(0); break;
-        case 1: d.Crear(); break;
-        case 2: d.Eliminar(); break;
-        case 3: d.Lista(); break;
+        Console.Clear();
+        Console.WriteLine("Elige un tipo de desayuno:");
+        Console.WriteLine("1. Continental");
+        Console.WriteLine("2. Buffet");
+        Console.WriteLine("3. Americano");
+        Console.WriteLine("4. Inglés");
+        Console.Write("Ingresa el número del desayuno que deseas elegir (1-4): ");
     }
-    Console.Write("\nDesea regresar al menú? [si]: ");
-    regresar = Console.ReadLine().ToLower();
-    Console.Clear();
-}  while (regresar == "si");
 
-//crear: crear un desayuno
-//lista: cuantos días se sirven los desayunos
-//elimina: eliminar un desayuno
+    static void MostrarDesayunoSeleccionado(string opcion)
+    {
+        Desayuno desayunoSeleccionado = null;
+
+        switch (opcion)
+        {
+            case "1":
+                desayunoSeleccionado = new Desayuno("Continental", 30.0, 2);
+                break;
+            case "2":
+                desayunoSeleccionado = new Desayuno("Buffet", 50.0, 1);
+                break;
+            case "3":
+                desayunoSeleccionado = new Desayuno("Americano", 15.0, 5);
+                break;
+            case "4":
+                desayunoSeleccionado = new Desayuno("Inglés", 25.0, 3);
+                break;
+            default:
+                Console.WriteLine("Opción no válida. Por favor, elige un número entre 1 y 4.");
+                return;
+        }
+
+        Console.Clear();
+        Console.WriteLine($"Has seleccionado el desayuno: {desayunoSeleccionado.Nombre}");
+        Console.WriteLine($"Precio: S/{desayunoSeleccionado.Precio}");
+        Console.WriteLine($"Se sirve durante {desayunoSeleccionado.Dias} días.");
+
+        Console.ReadKey();
+    }
+}
